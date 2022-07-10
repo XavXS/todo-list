@@ -9,6 +9,15 @@ export default class task {
         this.#generateContent();
     }
 
+    #generateContent() {
+        const clone = document
+                        .querySelector('template#task-template')
+                        .content
+                        .querySelector('div')
+                        .cloneNode(true);
+        this.#content = clone;
+    }
+
     getTitle() {
         return this.title;
     }
@@ -23,10 +32,6 @@ export default class task {
 
     getPriority() {
         return this.priority;
-    }
-
-    #generateContent() {
-        
     }
 
     getContent() {
