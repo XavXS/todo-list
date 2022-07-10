@@ -7,4 +7,5 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
     },
     mode: 'production',
+    devtool: 'inline-source-map',
 }
