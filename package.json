@@ -1,0 +1,25 @@
+{
+  "name": "todo-list-forreal",
+  "version": "1.0.0",
+  "description": "todo list for the odin project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "npx webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XavXS/todo-list-forreal.git"
+  },
+  "author": "Xav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XavXS/todo-list-forreal/issues"
+  },
+  "homepage": "https://github.com/XavXS/todo-list-forreal#readme",
+  "devDependencies": {
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
