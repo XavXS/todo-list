@@ -1,1 +1,3 @@
-console.log('hello world');
+import initializeUI from "./modules/ui";
+
+initializeUI();
