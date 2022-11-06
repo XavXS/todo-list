@@ -1,3 +1,5 @@
+import {loadContent as loadTaskTab} from './taskUI';
+
 function createTabs() {
     let tabs = document.querySelector('#tabs');
 
@@ -6,6 +8,8 @@ function createTabs() {
     tasks.classList.add('tab');
     tasks.addEventListener('click', e => {
         setActiveTab(e.target);
+        // load task tab
+        loadTaskTab();
     });
 
     let projects = document.createElement('button');
@@ -13,6 +17,7 @@ function createTabs() {
     projects.classList.add('tab');
     projects.addEventListener('click', e => {
         setActiveTab(e.target);
+        // load project tab
     });
 
     let notes = document.createElement('button');
@@ -20,6 +25,7 @@ function createTabs() {
     notes.classList.add('tab');
     notes.addEventListener('click', e => {
         setActiveTab(e.target);
+        // load note tab
     });
 
     tabs.appendChild(tasks);
