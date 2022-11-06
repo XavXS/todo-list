@@ -28,5 +28,7 @@ function setActiveTab(element) {
 
 export default function initializeUI() {
     initializeTabs();
-    setActiveTab(document.querySelector('.tab'));
+    setActiveTab(document.querySelector('#tasks-tab'));
+    taskUI.initialize();
+    taskUI.loadContent();
 }
