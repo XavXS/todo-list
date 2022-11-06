@@ -1,4 +1,4 @@
-import {loadContent as loadTaskTab} from './taskUI';
+import * as taskUI from './taskUI';
 
 function createTabs() {
     let tabs = document.querySelector('#tabs');
@@ -8,8 +8,7 @@ function createTabs() {
     tasks.classList.add('tab');
     tasks.addEventListener('click', e => {
         setActiveTab(e.target);
-        // load task tab
-        loadTaskTab();
+        taskUI.loadContent();
     });
 
     let projects = document.createElement('button');
