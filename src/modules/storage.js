@@ -51,6 +51,7 @@ function retrieveProjects() {
 
 function retrieveTasks() {
     let tasksData = JSON.parse(localStorage.getItem('tasks'));
+    if(!tasksData) return;
     tasksData.forEach(t => {
         tasks.push(
             t.title,
@@ -63,6 +64,7 @@ function retrieveTasks() {
 
 function retrieveNotes() {
     let notesData = JSON.parse(localStorage.getItem('notes'));
+    if(!notesData) return;
     notesData.forEach(n => {
         notes.push(
             n.title,
