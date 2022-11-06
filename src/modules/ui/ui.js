@@ -2,36 +2,22 @@ import * as taskUI from './taskUI';
 import * as projectUI from './projectUI';
 import * as noteUI from './noteUI';
 
-function createTabs() {
-    let tabs = document.querySelector('#tabs');
-
-    let tasks = document.createElement('button');
-    tasks.textContent = 'Tasks';
-    tasks.classList.add('tab');
-    tasks.addEventListener('click', e => {
-        setActiveTab(e.target);
-        taskUI.loadContent();
-    });
-
-    let projects = document.createElement('button');
-    projects.textContent = 'Projects';
-    projects.classList.add('tab');
-    projects.addEventListener('click', e => {
-        setActiveTab(e.target);
-        projectUI.loadContent();
-    });
-
-    let notes = document.createElement('button');
-    notes.textContent = 'Notes';
-    notes.classList.add('tab');
-    notes.addEventListener('click', e => {
-        setActiveTab(e.target);
-        noteUI.loadContent();
-    });
-
-    tabs.appendChild(tasks);
-    tabs.appendChild(projects);
-    tabs.appendChild(notes);
+function initializeTabs() {
+    document.querySelector('#tasks-tab')
+        .addEventListener('click', e => {
+            setActiveTab(e.target);
+            taskUI.loadContent();
+        });
+    document.querySelector('#projects-tab')
+        .addEventListener('click', e => {
+            setActiveTab(e.target);
+            projectUI.loadContent();
+        });
+    document.querySelector('#notes-tab')
+        .addEventListener('click', e => {
+            setActiveTab(e.target);
+            noteUI.loadContent();
+        });
 }
 
 function setActiveTab(element) {
@@ -41,7 +27,7 @@ function setActiveTab(element) {
 }
 
 export default function initializeUI() {
-    createTabs();
+    initializeTabs();
     setActiveTab(document.querySelector('.tab'));
     taskUI.loadContent();
 }
