@@ -29,4 +29,8 @@ export default class project {
             )
         );
     }
+
+    getTasks() {
+        return this.#tasks;
+    }
 };

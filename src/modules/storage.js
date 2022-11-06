@@ -1,13 +1,14 @@
 import project from './project';
 import task from './task';
 import note from './note';
-import {toDate} from 'date-fns';
+import parseISO from 'date-fns/parseISO'
 
 let projects = [];
 let tasks = [];
 let notes = [];
 
 export function retrieveData() {
+    //localStorage.setItem('tasks', null);
     retrieveProjects();
     retrieveTasks();
     retrieveNotes();
@@ -35,10 +36,10 @@ function retrieveProjects() {
 
             newProject.addTask(
                 new task(
-                    t.title,
-                    t.desc,
-                    toDate(t.due),
-                    t.prio
+                    t._title,
+                    t._desc,
+                    parseISO(t._due),
+                    t._prio
                 )
             );
         });
@@ -51,15 +52,22 @@ function retrieveProjects() {
 
 function retrieveTasks() {
     let tasksData = JSON.parse(localStorage.getItem('tasks'));
-    if(!tasksData) return;
+    if(!tasksData) {
+        console.log('tasks not found');
+        return;
+    }
+    console.log('tasks found:\n' + tasksData);
     tasksData.forEach(t => {
         tasks.push(
-            t.title,
-            t.desc,
-            toDate(t.due),
-            t.prio
-        );
+            new task(
+                t._title,
+                t._desc,
+                parseISO(t._due),
+                t._prio
+            )
+        )
     });
+    console.log(tasks);
 }
 
 function retrieveNotes() {
@@ -67,9 +75,9 @@ function retrieveNotes() {
     if(!notesData) return;
     notesData.forEach(n => {
         notes.push(
-            n.title,
-            n.desc,
-            n.color
+            n._title,
+            n._desc,
+            n._color
         );
     });
 }
@@ -93,6 +101,7 @@ export function saveProjects() {
 }
 
 export function createTask(newTask) {
+    console.log('creating task..');
     if(newTask) {
         tasks.push(newTask);
         return;
@@ -105,11 +114,13 @@ export function createTask(newTask) {
             1
         )
     );
+    console.log(tasks);
     saveTasks();
 }
 
 export function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
+    console.log(JSON.stringify(tasks));
 }
 
 export function createNote(newNote) {
@@ -130,3 +141,7 @@ export function createNote(newNote) {
 export function saveNotes() {
     localStorage.setItem('notes', JSON.stringify(notes));
 }
+
+export function getTasks() { return tasks; }
+export function getProjects() { return projects; }
+export function getNotes() { return notes; }
