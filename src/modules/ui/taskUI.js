@@ -28,7 +28,10 @@ function createAddBtn() {
     let newAddBtn = document.createElement('button');
     newAddBtn.id = 'add-btn';
     newAddBtn.textContent = '+';
-    newAddBtn.addEventListener('click', () => storage.createTask());
+    newAddBtn.addEventListener('click', () => {
+        let newTask = storage.createTask();
+        taskList.appendChild(createTask(newTask));
+    });
     addBtn = newAddBtn;
 }
 

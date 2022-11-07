@@ -105,18 +105,19 @@ export function createTask(newTask) {
     console.log('creating task..');
     if(newTask) {
         tasks.push(newTask);
-        return;
+        return newTask;
     }
-    tasks.push(
+    newTask = 
         new task(
             'New Task',
             'Enter Description',
             new Date(),
             1
-        )
-    );
+        );
+    tasks.push(newTask);
     console.log(tasks);
     saveTasks();
+    return newTask;
 }
 
 export function saveTasks() {
