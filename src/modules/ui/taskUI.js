@@ -1,6 +1,6 @@
 import task from "../task";
 import * as storage from "../storage";
-import { compareAsc, isToday } from 'date-fns';
+import { format, isThisWeek, isThisYear, isThisMonth, isToday, parseISO } from 'date-fns';
 
 let times, taskList, addBtn;
 
@@ -75,34 +75,32 @@ function setActiveTime(element) {
 function reloadTasks(time) {
     let tasks = storage.getTasks();
     let projects = storage.getProjects();
+    let filteredTasks;
 
     taskList.textContent = '';
 
     switch(time) {
         case 'day':
-            let dayTasks =
-                    tasks
-                        .filter(e => {
-                            return isToday(e.due);
-                        })
-                        .sort((a, b) => {
-                            return b.due - a.due;
-                        });
-            dayTasks.forEach(sample => {
-                taskList.appendChild(createTask(sample));
-            });
+            filteredTasks = tasks.filter(e => isToday(e.due));
             break;
         case 'week':
+            filteredTasks = tasks.filter(e => isThisWeek(e.due));
             break;
         case 'month':
+            filteredTasks = tasks.filter(e => isThisMonth(e.due));
             break;
         case 'year':
+            filteredTasks = tasks.filter(e => isThisYear(e.due));
             break;
         case 'all':
+            filteredTasks = tasks; //for now
             break;
         default:
             throw 'could not find' + time + '!';
     }
+
+    filteredTasks.sort((a, b) => a.due - b.due);
+    filteredTasks.forEach(sample => taskList.appendChild(createTask(sample)));
 }
 
 function createTask(sample) {
@@ -110,8 +108,8 @@ function createTask(sample) {
     container.innerHTML =
         "<div class='basic'>" +
             "<div class='info'>" +
-                "<input type='text'>" +
-                "<input type='date'>" +
+                "<input type='text' class='title'>" +
+                "<input type='date' class='due'>" +
             "</div>" +
             "<div class='actions'>" +
                 "<input type='checkbox' class='expand'>" +
@@ -129,6 +127,24 @@ function createTask(sample) {
             "<textarea class='description'></textarea>" +
         "</div>"
 
+    let title = container.querySelector('.title');
+    title.value = sample.title;
+    title.addEventListener('change', (e) => {
+        sample.title = e.target.value;
+        storage.saveTasks();
+        storage.saveProjects();
+    });
+
+    let due = container.querySelector('.due');
+    due.value = format(sample.due, 'yyyy-MM-dd');
+    due.addEventListener('change', (e) => {
+        let newDue = parseISO(e.target.value);
+        if(isNaN(newDue)) return;
+        sample.due = newDue;
+        storage.saveTasks();
+        storage.saveProjects();
+    });
+
     let expand = container.querySelector('.expand');
     expand.addEventListener('change', (e) => {
         if(e.target.checked) console.log('expand checked');
@@ -141,7 +157,13 @@ function createTask(sample) {
         storage.removeTask(sample);
     });
 
-    let details = container.querySelector('.details');
+    let description = container.querySelector('.description');
+    description.value = sample.desc;
+    description.addEventListener('change', (e) => {
+        sample.desc = description.value;
+        storage.saveTasks();
+        storage.saveProjects();
+    });
 
     return container;
 }

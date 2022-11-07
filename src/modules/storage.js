@@ -2,7 +2,6 @@ import project from './project';
 import task from './task';
 import note from './note';
 import parseISO from 'date-fns/parseISO'
-import { it } from 'date-fns/locale';
 
 let projects = [];
 let tasks = [];
@@ -97,11 +96,13 @@ export function saveProjects() {
 }
 
 export function createTask() {
-    newTask = 
+    let newDate = new Date();
+    newDate.setHours(0, 0, 0, 0);
+    let newTask = 
         new task(
             'New Task',
             'Enter Description',
-            new Date(),
+            newDate,
             1
         );
     tasks.push(newTask);
