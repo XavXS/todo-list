@@ -1,6 +1,12 @@
-import task from "../task";
 import * as storage from "../storage";
-import { format, isThisWeek, isThisYear, isThisMonth, isToday, parseISO } from 'date-fns';
+import { 
+    format, 
+    isThisWeek, 
+    isThisYear, 
+    isThisMonth, 
+    isToday, 
+    parseISO 
+} from 'date-fns';
 
 let times, taskList, addBtn;
 
@@ -103,7 +109,7 @@ function reloadTasks(time) {
     filteredTasks.forEach(sample => taskList.appendChild(createTask(sample)));
 }
 
-function createTask(sample) {
+export function createTask(sample) {
     let container = document.createElement('div');
     container.innerHTML =
         "<div class='basic'>" +

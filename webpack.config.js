@@ -8,4 +8,9 @@ module.exports = {
     },
     mode: 'production',
     devtool: 'inline-source-map',
+    performance: {
+        hints: false,
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
+    },
 }
