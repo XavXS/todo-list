@@ -2,6 +2,7 @@ import project from './project';
 import task from './task';
 import note from './note';
 import parseISO from 'date-fns/parseISO'
+import { it } from 'date-fns/locale';
 
 let projects = [];
 let tasks = [];
@@ -143,5 +144,25 @@ export function saveNotes() {
 }
 
 export function getTasks() { return tasks; }
+
 export function getProjects() { return projects; }
+
 export function getNotes() { return notes; }
+
+export function removeTask(targetTask) {
+    const index = tasks.indexOf(targetTask);
+    if(index > -1) tasks.splice(index, 1);
+    saveTasks();
+}
+
+export function removeProject(targetProject) {
+    const index = projects.indexOf(targetProject);
+    if(index > -1) projects.splice(index, 1);
+    saveProjects();
+}
+
+export function removeNote(targetNote) {
+    const index = projects.indexOf(targetNote);
+    if(index > -1) projects.splice(index, 1);
+    saveNotes();
+}

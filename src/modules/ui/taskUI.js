@@ -106,13 +106,13 @@ function createTask(sample) {
     let container = document.createElement('div');
     container.innerHTML =
         "<div class='basic'>" +
-            "<div>" +
+            "<div class='info'>" +
                 "<input type='text'>" +
                 "<input type='date'>" +
             "</div>" +
-            "<div>" +
-                "<input type='checkbox'>" +
-                "<button class='delete-task'>✖</button>" +
+            "<div class='actions'>" +
+                "<input type='checkbox' class='expand'>" +
+                "<button class='delete'>✖</button>" +
             "</div>" + 
         "</div>" +
         "<div class='details>" +
@@ -125,5 +125,20 @@ function createTask(sample) {
             "</div>" +
             "<textarea class='description'></textarea>" +
         "</div>"
+
+    let expand = container.querySelector('.expand');
+    expand.addEventListener('change', (e) => {
+        if(e.target.checked) console.log('expand checked');
+        else console.log('expand unchecked');
+    });
+
+    let deleteTask = container.querySelector('.delete');
+    deleteTask.addEventListener('click', (e) => {
+        container.remove();
+        storage.removeTask(sample);
+    });
+
+    let details = container.querySelector('.details');
+
     return container;
 }
