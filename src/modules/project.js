@@ -15,19 +15,16 @@ export default class project {
     get desc() { return this._desc; }
     set desc(newDesc) { this._desc = newDesc; }
 
-    addTask(task) {
-        if(task) {
-            this.#tasks.push(task);
-            return;
-        }
-        this.#tasks.push(
+    createTask() {
+        let newTask = 
             new task(
                 'New Task',
                 'Enter Description',
                 new Date(),
                 1
-            )
-        );
+            );
+        this.#tasks.push(newTask);
+        return newTask;
     }
 
     getTasks() {

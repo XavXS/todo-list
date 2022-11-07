@@ -111,12 +111,13 @@ function reloadTasks(time) {
 
 export function createTask(sample) {
     let container = document.createElement('div');
+    container.classList.add('task');
     container.innerHTML =
         "<div class='basic'>" +
             "<div class='info'>" +
                 "<input type='text' class='title'>" +
                 "<input type='date' class='due'>" +
-            "</div>" +
+            "</div>" +task
             "<div class='actions'>" +
                 "<input type='checkbox' class='expand'>" +
                 "<button class='remove'>✖</button>" +

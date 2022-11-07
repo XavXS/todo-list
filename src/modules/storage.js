@@ -77,22 +77,15 @@ function retrieveNotes() {
     });
 }
 
-export function createProject(newProject) {
-    if(newProject) {
-        projects.push(newProject);
-        return;
-    }
-    projects.push(
+export function createProject() {
+    let newProject = 
         new project(
             'New Project', 
             'Enter Description'
-        )
-    );
+        );
+    projects.push(newProject);
     saveProjects();
-}
-
-export function saveProjects() {
-    localStorage.setItem('projects', JSON.stringify(projects));
+    return newProject;
 }
 
 export function createTask() {
@@ -110,16 +103,7 @@ export function createTask() {
     return newTask;
 }
 
-export function saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    console.log(JSON.stringify(tasks));
-}
-
-export function createNote(newNote) {
-    if(newNote) {
-        notes.push(newNote);
-        return;
-    }
+export function createNote() {
     notes.push(
         new note(
             'New Note',
@@ -128,6 +112,15 @@ export function createNote(newNote) {
         )
     );
     saveNotes();
+}
+
+export function saveProjects() {
+    localStorage.setItem('projects', JSON.stringify(projects));
+}
+
+export function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    console.log(JSON.stringify(tasks));
 }
 
 export function saveNotes() {
