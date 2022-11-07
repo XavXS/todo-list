@@ -115,7 +115,7 @@ function createTask(sample) {
             "</div>" +
             "<div class='actions'>" +
                 "<input type='checkbox' class='expand'>" +
-                "<button class='delete'>✖</button>" +
+                "<button class='remove'>✖</button>" +
             "</div>" + 
         "</div>" +
         "<div class='details>" +
@@ -135,8 +135,8 @@ function createTask(sample) {
         else console.log('expand unchecked');
     });
 
-    let deleteTask = container.querySelector('.delete');
-    deleteTask.addEventListener('click', (e) => {
+    let removeBtn = container.querySelector('.remove');
+    removeBtn.addEventListener('click', (e) => {
         container.remove();
         storage.removeTask(sample);
     });

@@ -53,11 +53,7 @@ function retrieveProjects() {
 
 function retrieveTasks() {
     let tasksData = JSON.parse(localStorage.getItem('tasks'));
-    if(!tasksData) {
-        console.log('tasks not found');
-        return;
-    }
-    console.log('tasks found:\n' + tasksData);
+    if(!tasksData) return;
     tasksData.forEach(t => {
         tasks.push(
             new task(
@@ -68,7 +64,6 @@ function retrieveTasks() {
             )
         )
     });
-    console.log(tasks);
 }
 
 function retrieveNotes() {
@@ -101,12 +96,7 @@ export function saveProjects() {
     localStorage.setItem('projects', JSON.stringify(projects));
 }
 
-export function createTask(newTask) {
-    console.log('creating task..');
-    if(newTask) {
-        tasks.push(newTask);
-        return newTask;
-    }
+export function createTask() {
     newTask = 
         new task(
             'New Task',
@@ -115,7 +105,6 @@ export function createTask(newTask) {
             1
         );
     tasks.push(newTask);
-    console.log(tasks);
     saveTasks();
     return newTask;
 }
