@@ -82,28 +82,26 @@ function setActiveTime(element) {
 function reloadTasks(time) {
     let tasks = storage.getTasks();
     let projects = storage.getProjects();
-    let filteredTasks;
+    let filteredTasks = tasks;
+    projects.forEach(p => {
+        filteredTasks = filteredTasks.concat(p.getTasks());
+    });
 
     taskList.textContent = '';
 
     switch(time) {
         case 'day':
-            filteredTasks = tasks.filter(e => isToday(e.due));
+            filteredTasks = filteredTasks.filter(e => isToday(e.due));
             break;
         case 'week':
-            filteredTasks = tasks.filter(e => isThisWeek(e.due));
+            filteredTasks = filteredTasks.filter(e => isThisWeek(e.due));
             break;
         case 'month':
-            filteredTasks = tasks.filter(e => isThisMonth(e.due));
+            filteredTasks = filteredTasks.filter(e => isThisMonth(e.due));
             break;
         case 'year':
-            filteredTasks = tasks.filter(e => isThisYear(e.due));
+            filteredTasks = filteredTasks.filter(e => isThisYear(e.due));
             break;
-        case 'all':
-            filteredTasks = tasks; //for now
-            break;
-        default:
-            throw 'could not find' + time + '!';
     }
 
     filteredTasks.sort((a, b) => a.due - b.due);

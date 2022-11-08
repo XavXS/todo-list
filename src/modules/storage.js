@@ -15,7 +15,6 @@ export function retrieveData() {
 }
 
 function retrieveProjects() {
-    console.log(localStorage.getItem('projects'));
     let projectsData = JSON.parse(localStorage.getItem('projects'));
     if(!projectsData) return;
     projectsData.forEach(p => {
