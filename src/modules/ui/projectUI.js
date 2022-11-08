@@ -12,7 +12,6 @@ export function loadContent() {
     let content = document.querySelector('#content');
     content.textContent = '';
     content.appendChild(projectList);
-    content.appendChild(addBtn);
     reloadProjects();
 }
 
@@ -29,6 +28,7 @@ function createAddBtn() {
     newAddBtn.addEventListener('click', () => {
         let newProject = storage.createProject();
         projectList.appendChild(createProject(newProject));
+        projectList.appendChild(addBtn);
     });
     addBtn = newAddBtn;
 }
@@ -39,6 +39,7 @@ function reloadProjects() {
     projects.forEach(p => {
         projectList.appendChild(createProject(p));
     });
+    projectList.appendChild(addBtn);
 }
 
 function createProject(sample) {

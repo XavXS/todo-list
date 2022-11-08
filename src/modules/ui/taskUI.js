@@ -21,7 +21,6 @@ export function loadContent() {
     content.textContent = '';
     content.appendChild(times);
     content.appendChild(taskList);
-    content.appendChild(addBtn);
     setActiveTime(document.querySelector('#day'));
 }
 
@@ -38,6 +37,7 @@ function createAddBtn() {
     newAddBtn.addEventListener('click', () => {
         let newTask = storage.createTask();
         taskList.appendChild(createTask(newTask));
+        taskList.appendChild(addBtn);
     });
     addBtn = newAddBtn;
 }
@@ -106,6 +106,7 @@ function reloadTasks(time) {
 
     filteredTasks.sort((a, b) => a.due - b.due);
     filteredTasks.forEach(sample => taskList.appendChild(createTask(sample)));
+    taskList.appendChild(addBtn);
 }
 
 export function createTask(sample) {
@@ -115,7 +116,10 @@ export function createTask(sample) {
         "<div class='basic'>" +
             "<div class='info'>" +
                 "<input type='text' class='title'>" +
+                "<div>" +
+                "Due: " + 
                 "<input type='date' class='due'>" +
+                "</div>" +
             "</div>" +
             "<div class='actions'>" +
                 "<input type='checkbox' class='expand'>" +
@@ -123,13 +127,13 @@ export function createTask(sample) {
             "</div>" + 
             "<button class='remove'>✖</button>" +
         "</div>" +
-        "<div class='details>" +
+        "<div class='details'>" +
             "<div class='priorities'>" +
-                "<button class='priority'>1</button>" + 
-                "<button class='priority'>2</button>" + 
-                "<button class='priority'>3</button>" + 
-                "<button class='priority'>4</button>" + 
-                "<button class='priority'>5</button>" + 
+                "<button class='priority p1'>1</button>" + 
+                "<button class='priority p2'>2</button>" + 
+                "<button class='priority p3'>3</button>" + 
+                "<button class='priority p4'>4</button>" + 
+                "<button class='priority p5'>5</button>" + 
             "</div>" +
             "<textarea class='description'></textarea>" +
         "</div>"
@@ -154,8 +158,8 @@ export function createTask(sample) {
 
     let expand = container.querySelector('.expand');
     expand.addEventListener('change', (e) => {
-        if(e.target.checked) console.log('expand checked');
-        else console.log('expand unchecked');
+        if(e.target.checked) container.classList.add('expanded')
+        else container.classList.remove('expanded');
     });
 
     let finished = container.querySelector('.finished');
@@ -163,11 +167,11 @@ export function createTask(sample) {
     finished.addEventListener('change', (e) => {
         if(e.target.checked) {
             sample.finished = true;
-            container.classList.add('finished');
+            container.classList.add('done');
         }
         else {
             sample.finished = false;
-            container.classList.remove('finished');
+            container.classList.remove('done');
         }
         storage.saveTasks();
         storage.saveProjects();
