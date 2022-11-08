@@ -1,12 +1,12 @@
 import task from './task';
 export default class project {
     
-    #tasks;
+    _tasks = [];
 
     constructor(title, desc) {
         this._title = title;
         this._desc = desc;
-        this.#tasks = [];
+        this._tasks = [];
     }
 
     get title() { return this._title; }
@@ -23,11 +23,11 @@ export default class project {
                 new Date(),
                 1
             );
-        this.#tasks.push(newTask);
+        this._tasks.push(newTask);
         return newTask;
     }
 
     getTasks() {
-        return this.#tasks;
+        return this._tasks;
     }
 };

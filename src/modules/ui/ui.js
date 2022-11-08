@@ -30,5 +30,6 @@ export default function initializeUI() {
     initializeTabs();
     setActiveTab(document.querySelector('#tasks-tab'));
     taskUI.initialize();
+    projectUI.initialize();
     taskUI.loadContent();
 }

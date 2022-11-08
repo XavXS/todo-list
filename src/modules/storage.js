@@ -15,26 +15,12 @@ export function retrieveData() {
 }
 
 function retrieveProjects() {
-    console.log('retrieving projects data...');
-
     let projectsData = JSON.parse(localStorage.getItem('projects'));
-    if(!projectsData) {
-        console.log('projects data could not be found');
-        return;
-    }
-
-    console.log('found projects data:\n' + projectsData);
-
+    if(!projectsData) return;
     projectsData.forEach(p => {
-
-        console.log('found project data:\n' + p);
-
         let newProject = new project(p.title, p.desc);
-        p.tasks.forEach(t => {
-
-            console.log('found task data:\n' + t);
-
-            newProject.addTask(
+        p._tasks.forEach(t => {
+            newProject.createTask(
                 new task(
                     t._title,
                     t._desc,
@@ -43,9 +29,6 @@ function retrieveProjects() {
                 )
             );
         });
-
-        console.log('assembled project:\n' + newProject);
-
         projects.push(newProject);
     });
 }
@@ -135,8 +118,21 @@ export function getNotes() { return notes; }
 
 export function removeTask(targetTask) {
     const index = tasks.indexOf(targetTask);
-    if(index > -1) tasks.splice(index, 1);
-    saveTasks();
+    if(index > -1) {
+        tasks.splice(index, 1);
+        saveTasks();
+        return;
+    }
+
+    for(let i=0; i<projects.length; ++i) {
+        let pTasks = projects[i].getTasks();
+        let taskIndex = pTasks.indexOf(targetTask);
+        if(taskIndex > -1) {
+            pTasks.splice(taskIndex, 1);
+            saveProjects();
+            return;
+        }
+    }
 }
 
 export function removeProject(targetProject) {

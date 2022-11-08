@@ -18,6 +18,7 @@ export function initialize() {
 
 export function loadContent() {
     let content = document.querySelector('#content');
+    content.textContent = '';
     content.appendChild(times);
     content.appendChild(taskList);
     content.appendChild(addBtn);
@@ -117,7 +118,7 @@ export function createTask(sample) {
             "<div class='info'>" +
                 "<input type='text' class='title'>" +
                 "<input type='date' class='due'>" +
-            "</div>" +task
+            "</div>" +
             "<div class='actions'>" +
                 "<input type='checkbox' class='expand'>" +
                 "<button class='remove'>✖</button>" +

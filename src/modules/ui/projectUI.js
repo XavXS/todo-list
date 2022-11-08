@@ -9,10 +9,15 @@ export function initialize() {
 }
 
 export function loadContent() {
-    document.querySelector('#content').textContent = '';
+    let content = document.querySelector('#content');
+    content.textContent = '';
+    content.appendChild(projectList);
+    content.appendChild(addBtn);
+    reloadProjects();
 }
 
 function createProjectList() {
+    console.log('initializing project list');
     let newProjectList = document.createElement('div');
     newProjectList.classList.add('project-list');
     projectList = newProjectList;
@@ -25,6 +30,15 @@ function createAddBtn() {
     newAddBtn.addEventListener('click', () => {
         let newProject = storage.createProject();
         projectList.appendChild(createProject(newProject));
+    });
+    addBtn = newAddBtn;
+}
+
+function reloadProjects() {
+    let projects = storage.getProjects();
+    projectList.textContent = '';
+    projects.forEach(p => {
+        projectList.appendChild(createProject(p));
     });
 }
 
@@ -43,14 +57,22 @@ function createProject(sample) {
             "<div class='task-list'>" +
             "<button class='task-add-btn'>+</button>" +
         "</div>";
+
+    let removeBtn = container.querySelector('.remove');
+    removeBtn.addEventListener('click', () => {
+        container.remove();
+        storage.removeProject(sample);
+    });
     
     let taskList = container.querySelector('.task-list');
+    let tasks = sample.getTasks();
+    tasks.forEach(t => taskList.appendChild(createTask(t)));
+
     let addBtn = container.querySelector('.task-add-btn');
     addBtn.addEventListener('click', () => {
         let newTask = sample.createTask();
         taskList.appendChild(createTask(newTask));
         storage.saveProjects();
-        // left off here
     });
 
     return container;
