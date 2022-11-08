@@ -10,7 +10,7 @@ export default class project {
     }
 
     get title() { return this._title; }
-    set title(newTitle) { this._name = newTitle; }
+    set title(newTitle) { this._title = newTitle; }
 
     get desc() { return this._desc; }
     set desc(newDesc) { this._desc = newDesc; }

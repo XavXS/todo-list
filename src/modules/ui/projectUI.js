@@ -49,19 +49,33 @@ function createProject(sample) {
         "<div class='basic-info'>" +
             "<input type='text' class='title'>" +
             "<input type='checkbox' class='expand'>" +
-            "<button class='remove'>" +
+            "<button class='remove'>✖</button>" +
         "</div>" +
         "<div class='details'>" +
             "<textarea class='description'></textarea>" +
             "<h3>Tasks</h3>" +
-            "<div class='task-list'>" +
+            "<div class='task-list'></div>" +
             "<button class='task-add-btn'>+</button>" +
         "</div>";
+
+    let title = container.querySelector('.title');
+    title.value = sample.title;
+    title.addEventListener('change', (e) => {
+        sample.title = e.target.value;
+        storage.saveProjects();
+    });
 
     let removeBtn = container.querySelector('.remove');
     removeBtn.addEventListener('click', () => {
         container.remove();
         storage.removeProject(sample);
+    });
+
+    let description = container.querySelector('.description');
+    description.value = sample.desc;
+    description.addEventListener('change', (e) => {
+        sample.desc = e.target.value;
+        storage.saveProjects();
     });
     
     let taskList = container.querySelector('.task-list');

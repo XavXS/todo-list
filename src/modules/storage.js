@@ -15,12 +15,13 @@ export function retrieveData() {
 }
 
 function retrieveProjects() {
+    console.log(localStorage.getItem('projects'));
     let projectsData = JSON.parse(localStorage.getItem('projects'));
     if(!projectsData) return;
     projectsData.forEach(p => {
-        let newProject = new project(p.title, p.desc);
+        let newProject = new project(p._title, p._desc);
         p._tasks.forEach(t => {
-            newProject.createTask(
+            newProject.getTasks().push(
                 new task(
                     t._title,
                     t._desc,
@@ -99,6 +100,7 @@ export function createNote() {
 
 export function saveProjects() {
     localStorage.setItem('projects', JSON.stringify(projects));
+    console.log(JSON.stringify(projects));
 }
 
 export function saveTasks() {
