@@ -11,6 +11,6 @@ export default class note {
     get desc() { return this._desc; };
     set desc(newDesc) { this._desc = newDesc; };
 
-    get color() { return this._desc; };
-    set color(newColor) { this._desc = newColor; };
+    get color() { return this._color; };
+    set color(newColor) { this._color = newColor; };
 }
