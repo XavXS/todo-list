@@ -1,8 +1,13 @@
 :root {
     font-size: 14px;
-    --app-color: #4d4350;
-    --task-color: #9fdbe6;
-    --p1-color: #92df98;
+    --app-color: #494949;
+    --task-color-dark: #627a7f;
+    --task-color: #78969c;
+    --p1-color: rgb(146, 221, 223);
+    --p2-color: rgb(91, 212, 119);
+    --p3-color: rgb(209, 210, 119);
+    --p4-color: rgb(225, 163, 116);
+    --p5-color: rgb(227, 124, 124);
 }
 
 * {
@@ -21,22 +26,46 @@ body {
     height: 100vh;
 }
 
+input, textarea {
+    outline: none;
+    font-size: 1.15rem;
+}
+
 .task {
     background-color: var(--task-color);
     border-radius: 8px;
+    padding: 8px;
+    position: relative;
+    transition: 0.5s;
+}
+#add-btn {
+    border-radius: 8px;
+    border-style: dashed;
+    border: 5px white dashed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 64px;
+    font-size: 3rem;
+    transition: 0.2s;
+}
+
+#add-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transition: 0.2s;
 }
 
 .app {
     padding: 8px;
     background-color: var(--app-color);
     border-radius: 8px;
-    width: 512px;
-    height: 450px;
+    width: 625px;
 }
 
 .tab {
     font-size: 2rem;
     margin-right: 16px;
+    margin-bottom: 4px;
     transition: 0.2s;
     border-radius: 4px;
     padding: 0 4px;
@@ -45,13 +74,137 @@ body {
 .time {
     font-size: 1.5rem;
     margin-right: 8px;
+    margin-bottom: 4px;
     transition: 0.2s;
     border-radius: 4px;
     padding: 0 4px;
+}
+
+.title {
+    font-size: 1.5rem;
+}
+
+.basic {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 16px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.actions {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.priorities {
+    display: flex;
+    justify-content: center;
+}
+
+.priority {
+    font-size: 1.15rem;
+    padding: 4px 8px;
+    color: 1;
+    flex-grow: 1;
+}
+
+.p1 {
+    background-color: var(--p1-color);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.p2 {
+    background-color: var(--p2-color);
+}
+
+.p3 {
+    background-color: var(--p3-color);
+}
+
+.p4 {
+    background-color: var(--p4-color);
+}
+
+.p5 {
+    background-color: var(--p5-color);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .active {
     background-color: rgb(240, 240, 240);
     color: rgb(65, 65, 65);
     transition: 0.2s;
+}
+
+.finished {
+    width: 32px;
+    height: 32px;
+}
+
+.expand {
+    width: 32px;
+    height: 32px;
+}
+
+.remove {
+    font-size: 1.25rem;
+    position: absolute;
+    right: 4px;
+    top: 2px;
+    transition: 0.2s;
+}
+
+.remove:hover {
+    color: var(--p5-color);
+    transition: 0.2s;
+}
+
+.details {
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: 0.5s;
+}
+
+.expanded > .details {
+    height: 100%;
+    transition: 0.5s;
+}
+
+.description {
+    width: 100%;
+    height: 5em;
+    background-color: var(--task-color-dark);
+    padding: 4px;
+    border-radius: 4px;
+    resize: none;
+}
+
+#task-list, #project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 400px;
+    overflow: scroll;
+}
+
+@media only screen and (max-width: 650px) {
+    .app {
+        width: 100vh;
+        height: 100vh;
+    }
+
+    .task-list, .project-list {
+        height: 100%;
+    }
 }
