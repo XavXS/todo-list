@@ -1,3 +1,56 @@
+:root {
+    font-size: 14px;
+    --app-color: #4d4350;
+    --task-color: #9fdbe6;
+    --p1-color: #92df98;
+}
+
 * {
-    border: 1px rgb(175, 175, 175) solid;
+    font-family: sans-serif;
+    color: white;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.task {
+    background-color: var(--task-color);
+}
+
+.app {
+    padding: 8px;
+    background-color: var(--app-color);
+    border-radius: 8px;
+    width: 512px;
+    height: 450px;
+}
+
+.tab {
+    font-size: 2rem;
+    margin-right: 16px;
+    transition: 0.2s;
+    border-radius: 4px;
+    padding: 0 4px;
+}
+
+.time {
+    font-size: 1.5rem;
+    margin-right: 8px;
+    transition: 0.2s;
+    border-radius: 4px;
+    padding: 0 4px;
+}
+
+.active {
+    background-color: rgb(240, 240, 240);
+    color: rgb(65, 65, 65);
+    transition: 0.2s;
 }
