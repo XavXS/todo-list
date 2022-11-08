@@ -53,9 +53,11 @@ function retrieveNotes() {
     if(!notesData) return;
     notesData.forEach(n => {
         notes.push(
-            n._title,
-            n._desc,
-            n._color
+            new note(
+                n._title,
+                n._desc,
+                n._color
+            )
         );
     });
 }
@@ -87,24 +89,23 @@ export function createTask() {
 }
 
 export function createNote() {
-    notes.push(
+    let newNote = 
         new note(
             'New Note',
             'Enter Details',
             '#FFFFFF'
-        )
-    );
+        );
+    notes.push(newNote);
     saveNotes();
+    return newNote;
 }
 
 export function saveProjects() {
     localStorage.setItem('projects', JSON.stringify(projects));
-    console.log(JSON.stringify(projects));
 }
 
 export function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
-    console.log(JSON.stringify(tasks));
 }
 
 export function saveNotes() {
@@ -143,7 +144,7 @@ export function removeProject(targetProject) {
 }
 
 export function removeNote(targetNote) {
-    const index = projects.indexOf(targetNote);
-    if(index > -1) projects.splice(index, 1);
+    const index = notes.indexOf(targetNote);
+    if(index > -1) notes.splice(index, 1);
     saveNotes();
 }

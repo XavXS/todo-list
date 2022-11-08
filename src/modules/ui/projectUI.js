@@ -17,7 +17,6 @@ export function loadContent() {
 }
 
 function createProjectList() {
-    console.log('initializing project list');
     let newProjectList = document.createElement('div');
     newProjectList.classList.add('project-list');
     projectList = newProjectList;

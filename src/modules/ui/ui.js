@@ -29,7 +29,10 @@ function setActiveTab(element) {
 export default function initializeUI() {
     initializeTabs();
     setActiveTab(document.querySelector('#tasks-tab'));
+
     taskUI.initialize();
     projectUI.initialize();
+    noteUI.initialize();
+    
     taskUI.loadContent();
 }
