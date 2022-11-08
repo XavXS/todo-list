@@ -21,7 +21,8 @@ export default class project {
                 'New Task',
                 'Enter Description',
                 new Date(),
-                1
+                1,
+                false
             );
         this._tasks.push(newTask);
         return newTask;

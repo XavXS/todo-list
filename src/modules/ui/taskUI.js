@@ -119,8 +119,9 @@ export function createTask(sample) {
             "</div>" +
             "<div class='actions'>" +
                 "<input type='checkbox' class='expand'>" +
-                "<button class='remove'>✖</button>" +
+                "<input type='checkbox' class='finished'>" +
             "</div>" + 
+            "<button class='remove'>✖</button>" +
         "</div>" +
         "<div class='details>" +
             "<div class='priorities'>" +
@@ -155,6 +156,21 @@ export function createTask(sample) {
     expand.addEventListener('change', (e) => {
         if(e.target.checked) console.log('expand checked');
         else console.log('expand unchecked');
+    });
+
+    let finished = container.querySelector('.finished');
+    finished.checked = sample.finished;
+    finished.addEventListener('change', (e) => {
+        if(e.target.checked) {
+            sample.finished = true;
+            container.classList.add('finished');
+        }
+        else {
+            sample.finished = false;
+            container.classList.remove('finished');
+        }
+        storage.saveTasks();
+        storage.saveProjects();
     });
 
     let removeBtn = container.querySelector('.remove');

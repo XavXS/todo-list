@@ -25,7 +25,8 @@ function retrieveProjects() {
                     t._title,
                     t._desc,
                     parseISO(t._due),
-                    t._prio
+                    t._prio,
+                    t._finished
                 )
             );
         });
@@ -42,7 +43,8 @@ function retrieveTasks() {
                 t._title,
                 t._desc,
                 parseISO(t._due),
-                t._prio
+                t._prio,
+                t._finished
             )
         )
     });
@@ -81,7 +83,8 @@ export function createTask() {
             'New Task',
             'Enter Description',
             newDate,
-            1
+            1,
+            false
         );
     tasks.push(newTask);
     saveTasks();
