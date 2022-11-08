@@ -23,6 +23,7 @@ body {
 
 .task {
     background-color: var(--task-color);
+    border-radius: 8px;
 }
 
 .app {
