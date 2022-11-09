@@ -20,6 +20,7 @@
     margin: 0;
     border: 0;
     background: none;
+    box-sizing: border-box;
 }
 
 body {
@@ -29,6 +30,7 @@ body {
     align-items: center;
     height: 100vh;
     scrollbar-width: none;
+    background-color: rgb(27, 28, 44);
 }
 
 ::-webkit-scrollbar {
@@ -254,7 +256,6 @@ h3 {
     flex-direction: column;
     gap: 4px;
     transition: 0.5s;
-    height: 0;
 }
 
 .expanded>.details {
