@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
 :root {
     font-size: 14px;
     --app-color: #3c4752;
     --task-color-dark: #627a7f;
     --task-color: #78969c;
     --project-color: #8dafb6;
-    ;
     --project-color-dark: #74637e;
     --p1-color: rgb(146, 221, 223);
     --p2-color: rgb(91, 212, 119);
@@ -14,7 +15,7 @@
 }
 
 * {
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: white;
     padding: 0;
     margin: 0;
@@ -71,12 +72,12 @@ h3 {
 .task-add-btn {
     border-radius: 8px;
     border-style: dashed;
-    border: 5px white dashed;
+    border: 4px white dashed;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60px;
-    font-size: 3rem;
+    height: 55px;
+    font-size: 2.8rem;
     transition: 0.2s;
 }
 
@@ -123,6 +124,18 @@ h3 {
 .title {
     font-size: 1.5rem;
     flex-grow: 1;
+}
+
+.due,
+.actions > span {
+    font-size: 1.1rem;
+}
+
+.done .title,
+.done input::-webkit-datetime-edit-fields-wrapper,
+.done .actions > span {
+    text-decoration-line: line-through;
+    color: rgb(217, 217, 217);
 }
 
 .basic {
@@ -195,45 +208,42 @@ h3 {
     height: 0;
 }
 
-.expand+span {
-    position: relative;
-}
-
 .expand+span::after {
-    content: '▼';
-    font-size: 2.2rem;
+    background-image: url('./img/expand.png');
+    background-size: 32px 32px;
+    content: '';
+    width: 32px;
+    height: 32px;
+    left: 0;
     position: absolute;
-    left: -11px;
-    top: -2px;
 }
 
 .expand:checked+span::after {
-    content: '▲';
+    background-image: url('./img/shrink.png');
 }
 
 .finished-label {
+    width: 32px;
+    height: 32px;
     position: relative;
-    width: 20px;
-    height: 20px;
-    border: 2px white solid;
-    border-radius: 8px;
-}
-
-.finished-label:hover {
-    background-color: rgba(255, 255, 255, 0.25);
 }
 
 .finished {
     height: 0;
 }
 
-.finished:checked+span::after {
+.finished+span::after {
+    background-image: url('./img/unchecked.png');
+    background-size: 32px 32px;
+    content: '';
+    width: 32px;
+    height: 32px;
+    left: 0;
     position: absolute;
-    content: '✓';
-    top: -16px;
-    left: -2px;
-    font-size: 2.8rem;
-    color: var(--p2-color);
+}
+
+.finished:checked+span::after {
+    background-image: url('./img/checked.png');
 }
 
 .remove {
@@ -255,11 +265,11 @@ h3 {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    transition: 0.5s;
+    height: 0;
 }
 
-.expanded>.details {
-    transition: 0.5s;
+.expanded > .details {
+   height: auto;
 }
 
 .description {

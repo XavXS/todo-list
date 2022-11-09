@@ -69,31 +69,17 @@ function createProject(sample) {
         storage.saveProjects();
     });
 
-    let details = container.querySelector('.details');
-    details.style.height = 0;
     let expand = container.querySelector('.expand');
     expand.addEventListener('change', (e) => {
-        if(e.target.checked) {
+        if(e.target.checked) 
             container.classList.add('expanded');
-            details.style.height = '1px';
-            details.style.height = details.scrollHeight + 'px';
-        }
-        else {
+        else 
             container.classList.remove('expanded');
-            details.style.height = 0;
-        }
     });
 
     let removeBtn = container.querySelector('.remove');
     removeBtn.addEventListener('click', () => {
         container.remove();
-
-        let tHeight = -8;
-        details.childNodes.forEach(c => {
-            tHeight += c.offsetHeight+8;
-        });
-        details.style.height = tHeight + 'px';
-        
         storage.removeProject(sample);
     });
 
@@ -113,13 +99,6 @@ function createProject(sample) {
         let newTask = sample.createTask();
         taskList.appendChild(createTask(newTask));
         taskList.appendChild(addBtn);
-
-        let tHeight = -8;
-        details.childNodes.forEach(c => {
-            tHeight += c.offsetHeight+8;
-        });
-        details.style.height = tHeight + 'px';
-
         storage.saveProjects();
     });
     taskList.appendChild(addBtn);

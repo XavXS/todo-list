@@ -163,21 +163,17 @@ export function createTask(sample) {
         storage.saveProjects();
     });
 
-    let details = container.querySelector('.details');
     let expand = container.querySelector('.expand');
     expand.addEventListener('change', (e) => {
-        if(e.target.checked) {
+        if(e.target.checked)
             container.classList.add('expanded');
-            details.style.height = details.scrollHeight + 'px';
-        }
-        else {
+        else 
             container.classList.remove('expanded');
-            details.style.height = 0;
-        }
     });
 
     let finished = container.querySelector('.finished');
     finished.checked = sample.finished;
+    if(sample.finished) container.classList.add('done');
     finished.addEventListener('change', (e) => {
         if(e.target.checked) {
             sample.finished = true;
