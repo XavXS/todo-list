@@ -1,8 +1,11 @@
 :root {
     font-size: 14px;
-    --app-color: #494949;
+    --app-color: #3c4752;
     --task-color-dark: #627a7f;
     --task-color: #78969c;
+    --project-color: #8dafb6;
+    ;
+    --project-color-dark: #74637e;
     --p1-color: rgb(146, 221, 223);
     --p2-color: rgb(91, 212, 119);
     --p3-color: rgb(209, 210, 119);
@@ -21,36 +24,62 @@
 
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    scrollbar-width: none;
 }
 
-input, textarea {
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    /* make scrollbar transparent */
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    --webkit-appearance: none;
+}
+
+input,
+textarea {
     outline: none;
     font-size: 1.15rem;
 }
 
-.task {
+h3 {
+    font-size: 1.5rem;
+}
+
+.task,
+.project {
     background-color: var(--task-color);
     border-radius: 8px;
     padding: 8px;
     position: relative;
-    transition: 0.5s;
 }
-#add-btn {
+
+.project {
+    background-color: var(--project-color);
+}
+
+#add-btn,
+.task-add-btn {
     border-radius: 8px;
     border-style: dashed;
     border: 5px white dashed;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 64px;
+    height: 60px;
     font-size: 3rem;
     transition: 0.2s;
 }
 
-#add-btn:hover {
+#add-btn:hover,
+.task-add-btn:hover {
     background-color: rgba(255, 255, 255, 0.25);
     transition: 0.2s;
 }
@@ -60,12 +89,21 @@ input, textarea {
     background-color: var(--app-color);
     border-radius: 8px;
     width: 625px;
+    margin: 128px 0;
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    min-height: 256px;
+    min-width: 550px;
 }
 
 .tab {
     font-size: 2rem;
     margin-right: 16px;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     transition: 0.2s;
     border-radius: 4px;
     padding: 0 4px;
@@ -82,18 +120,14 @@ input, textarea {
 
 .title {
     font-size: 1.5rem;
+    flex-grow: 1;
 }
 
 .basic {
     display: flex;
     justify-content: space-between;
     padding-right: 16px;
-}
-
-.info {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
+    gap: 16px;
 }
 
 .actions {
@@ -139,7 +173,7 @@ input, textarea {
 }
 
 .active {
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(228, 228, 228);
     color: rgb(65, 65, 65);
     transition: 0.2s;
 }
@@ -149,12 +183,59 @@ input, textarea {
     height: 32px;
 }
 
-.expand {
+.expand-label {
     width: 32px;
     height: 32px;
+    position: relative;
+}
+
+.expand {
+    height: 0;
+}
+
+.expand+span {
+    position: relative;
+}
+
+.expand+span::after {
+    content: '▼';
+    font-size: 2.2rem;
+    position: absolute;
+    left: -11px;
+    top: -2px;
+}
+
+.expand:checked+span::after {
+    content: '▲';
+}
+
+.finished-label {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 2px white solid;
+    border-radius: 8px;
+}
+
+.finished-label:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.finished {
+    height: 0;
+}
+
+.finished:checked+span::after {
+    position: absolute;
+    content: '✓';
+    top: -16px;
+    left: -2px;
+    font-size: 2.8rem;
+    color: var(--p2-color);
 }
 
 .remove {
+    color: var(--p5-color);
     font-size: 1.25rem;
     position: absolute;
     right: 4px;
@@ -163,48 +244,67 @@ input, textarea {
 }
 
 .remove:hover {
-    color: var(--p5-color);
+    color: white;
     transition: 0.2s;
 }
 
 .details {
-    height: 0;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 4px;
     transition: 0.5s;
+    height: 0;
 }
 
-.expanded > .details {
-    height: 100%;
+.expanded>.details {
     transition: 0.5s;
 }
 
 .description {
     width: 100%;
-    height: 5em;
+    min-height: 5rem;
     background-color: var(--task-color-dark);
     padding: 4px;
     border-radius: 4px;
     resize: none;
 }
 
-#task-list, #project-list {
+.project .description:first-child {
+    background-color: var(--task-color);
+}
+
+#content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#task-list,
+#project-list,
+.task-list {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    height: 400px;
-    overflow: scroll;
+    padding: 0;
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.task-list {
+    overflow: visible;
 }
 
 @media only screen and (max-width: 650px) {
-    .app {
-        width: 100vh;
-        height: 100vh;
+    body {
+        align-items: start;
+        flex-direction: row;
     }
 
-    .task-list, .project-list {
+    .app {
         height: 100%;
+        margin: 0;
+        border-radius: 0;
     }
 }

@@ -9,6 +9,7 @@ import {
 } from 'date-fns';
 
 let times, taskList, addBtn;
+let selectedTime;
 
 export function initialize() {
     createTimes();
@@ -21,7 +22,8 @@ export function loadContent() {
     content.textContent = '';
     content.appendChild(times);
     content.appendChild(taskList);
-    setActiveTime(document.querySelector('#day'));
+    if(selectedTime) setActiveTime(selectedTime);
+    else setActiveTime(document.querySelector('#day'));
 }
 
 function createTaskList() {
@@ -75,6 +77,7 @@ function createTimes() {
 function setActiveTime(element) {
     let times = document.querySelectorAll('.time');
     times.forEach(e => e.classList.remove('active'));
+    selectedTime = element;
     element.classList.add('active');
     reloadTasks(element.id);
 }
@@ -114,16 +117,20 @@ export function createTask(sample) {
     container.classList.add('task');
     container.innerHTML =
         "<div class='basic'>" +
-            "<div class='info'>" +
-                "<input type='text' class='title'>" +
-                "<div>" +
-                "Due: " + 
-                "<input type='date' class='due'>" +
-                "</div>" +
-            "</div>" +
+            "<input type='text' class='title'>" +
             "<div class='actions'>" +
-                "<input type='checkbox' class='expand'>" +
-                "<input type='checkbox' class='finished'>" +
+                "<span>" +
+                    "Due: " + 
+                    "<input type='date' class='due'>" +
+                "</span>" +
+                "<label class='expand-label'>" +
+                    "<input type='checkbox' class='expand'>" +
+                    "<span></span>" +
+                "</label>" +
+                "<label class='finished-label'>" +
+                    "<input type='checkbox' class='finished'>" +
+                    "<span></span>" +
+                "</label>" +
             "</div>" + 
             "<button class='remove'>✖</button>" +
         "</div>" +
@@ -156,10 +163,17 @@ export function createTask(sample) {
         storage.saveProjects();
     });
 
+    let details = container.querySelector('.details');
     let expand = container.querySelector('.expand');
     expand.addEventListener('change', (e) => {
-        if(e.target.checked) container.classList.add('expanded')
-        else container.classList.remove('expanded');
+        if(e.target.checked) {
+            container.classList.add('expanded');
+            details.style.height = details.scrollHeight + 'px';
+        }
+        else {
+            container.classList.remove('expanded');
+            details.style.height = 0;
+        }
     });
 
     let finished = container.querySelector('.finished');
