@@ -259,4 +259,7 @@ function generateTutorial() {
 
     notes.push(n1);
     notes.push(n2);
+
+    saveProjects();
+    saveNotes();
 }
