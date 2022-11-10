@@ -165,10 +165,15 @@ export function createTask(sample) {
 
     let expand = container.querySelector('.expand');
     expand.addEventListener('change', (e) => {
-        if(e.target.checked)
+        if(e.target.checked) {
             container.classList.add('expanded');
-        else 
+            container.style = '';
+        }
+        else  {
             container.classList.remove('expanded');
+            container.style.backgroundColor = 
+            'var(--p' +  sample.prio + '-color)';
+        }
     });
 
     let finished = container.querySelector('.finished');
@@ -209,11 +214,6 @@ export function createTask(sample) {
             e.target.classList.add('active');
             sample.prio = parseInt(e.target.textContent);
 
-            container.style.backgroundColor = 
-                'var(--p' +  e.target.textContent + '-color)';
-            description.style.backgroundColor = 
-                'var(--p' +  e.target.textContent + '-color-dark)';
-
             storage.saveTasks();
             storage.saveProjects();
         });
@@ -221,8 +221,6 @@ export function createTask(sample) {
     priorities[sample.prio-1].classList.add('active');
     container.style.backgroundColor = 
     'var(--p' +  sample.prio + '-color)';
-    description.style.backgroundColor = 
-    'var(--p' +  sample.prio + '-color-dark)';
 
     return container;
 }
