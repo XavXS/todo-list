@@ -23,7 +23,7 @@ export function loadContent() {
     content.appendChild(times);
     content.appendChild(taskList);
     if(selectedTime) setActiveTime(selectedTime);
-    else setActiveTime(document.querySelector('#day'));
+    else setActiveTime(document.querySelector('#all'));
 }
 
 function createTaskList() {
