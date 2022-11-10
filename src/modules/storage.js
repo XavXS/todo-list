@@ -86,7 +86,7 @@ export function createProject() {
 
 export function createTask() {
     let newDate = new Date();
-    newDate.setHours(0, 0, 0, 0);
+    newDate.setHours(0, 0, 0, 1);
     let newTask = 
         new task(
             'New Task',
