@@ -104,7 +104,7 @@ export function createNote() {
     let newNote = 
         new note(
             'New Note',
-            'Enter Details',
+            'Type in your notes',
             note.defaultColor
         );
     notes.push(newNote);
