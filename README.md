@@ -1,2 +1,2 @@
 # todo-list-forreal
-todo list for resuming The Odin Project
+Todo list for The Odin Project
