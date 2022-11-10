@@ -169,12 +169,23 @@ function generateTutorial() {
 
     let p1Task = p1.getTasks();
 
+    let d1 = new Date();
+    d1.setHours(0, 0, 0, 0);
+    let d2 = new Date();
+    d2.setHours(0, 0, 0, 0);
+    let d3 = new Date();
+    d3.setHours(0, 0, 0, 0);
+    let d4 = new Date();
+    d4.setHours(0, 0, 0, 0);
+    let d5 = new Date();
+    d5.setHours(0, 0, 0, 0);
+
     p1Task.push(
         new task(
             'Click to edit title!',
             'Click the numbers ↑↑ above ↑↑ to set priority\n\n' +
             '.. You can also click this text to edit description!',
-            new Date(),
+            d1,
             1,
             false
         )
@@ -185,7 +196,7 @@ function generateTutorial() {
             '..same for the date    → → →',
             'Click the numbers ↑↑ above ↑↑ to set priority\n\n' +
             '.. You can also click this text to edit description!',
-            new Date(),
+            d2,
             2,
             false
         )
@@ -203,7 +214,7 @@ function generateTutorial() {
             'Try clicking the triangle?',
             'Click the numbers ↑↑ above ↑↑ to set priority\n\n' +
             '.. You can also click this text to edit description!',
-            new Date(),
+            d3,
             3,
             false
         )
@@ -221,7 +232,7 @@ function generateTutorial() {
             'Guess what the circle does!',
             'Click the numbers ↑↑ above ↑↑ to set priority\n\n' +
             '.. You can also click this text to edit description!',
-            new Date(),
+            d4,
             4,
             true
         )
@@ -232,7 +243,7 @@ function generateTutorial() {
             'Challenge: delete this task (hint: x)',
             'Click the numbers ↑↑ above ↑↑ to set priority\n\n' +
             '.. You can also click this text to edit description!',
-            new Date(),
+            d5,
             5,
             false
         )
