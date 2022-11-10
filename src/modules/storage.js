@@ -8,10 +8,19 @@ let tasks = [];
 let notes = [];
 
 export function retrieveData() {
-    //localStorage.setItem('tasks', null);
+    if(checkFirstVisit()) {
+        generateTutorial();
+        return;
+    }
     retrieveProjects();
     retrieveTasks();
     retrieveNotes();
+}
+
+function checkFirstVisit() {
+    if(localStorage.getItem('visited')) return false;
+    localStorage.setItem('visited', 1);
+    return true;
 }
 
 function retrieveProjects() {
@@ -96,7 +105,7 @@ export function createNote() {
         new note(
             'New Note',
             'Enter Details',
-            '#d6d68d'
+            note.defaultColor
         );
     notes.push(newNote);
     saveNotes();
@@ -150,4 +159,104 @@ export function removeNote(targetNote) {
     const index = notes.indexOf(targetNote);
     if(index > -1) notes.splice(index, 1);
     saveNotes();
+}
+
+function generateTutorial() {
+    let p1 = new project(
+        'Goal: Learn to edit title and date',
+        'Have you finished the tutorial in "Tasks" tab?'
+    )
+
+    let p1Task = p1.getTasks();
+
+    p1Task.push(
+        new task(
+            'Click to edit title!',
+            'Click the numbers ↑↑ above ↑↑ to set priority\n\n' +
+            '.. You can also click this text to edit description!',
+            new Date(),
+            1,
+            false
+        )
+    );
+
+    p1Task.push(
+        new task(
+            '..same for the date    → → →',
+            'Click the numbers ↑↑ above ↑↑ to set priority\n\n' +
+            '.. You can also click this text to edit description!',
+            new Date(),
+            2,
+            false
+        )
+    );
+
+    let p2 = new project(
+        'Next Mission: Learn to edit details',
+        'Have you finished the tutorial in "Tasks" tab?'
+    )
+
+    let p2Task = p2.getTasks();
+
+    p2Task.push(
+        new task(
+            'Try clicking the triangle?',
+            'Click the numbers ↑↑ above ↑↑ to set priority\n\n' +
+            '.. You can also click this text to edit description!',
+            new Date(),
+            3,
+            false
+        )
+    );
+
+    let p3 = new project(
+        'My final challenge - Mastering tasks',
+        'Have you finished the tutorial in "Tasks" tab?'
+    )
+
+    let p3Task = p3.getTasks();
+
+    p3Task.push(
+        new task(
+            'Guess what the circle does!',
+            'Click the numbers ↑↑ above ↑↑ to set priority\n\n' +
+            '.. You can also click this text to edit description!',
+            new Date(),
+            4,
+            true
+        )
+    );
+
+    p3Task.push(
+        new task(
+            'Challenge: delete this task (hint: x)',
+            'Click the numbers ↑↑ above ↑↑ to set priority\n\n' +
+            '.. You can also click this text to edit description!',
+            new Date(),
+            5,
+            false
+        )
+    );
+
+    projects.push(p1);
+    projects.push(p2);
+    projects.push(p3);
+
+    let n1 = new note(
+        'Click me to edit title',
+        'Have you finished the tutorial in "Tasks" tab?\n\n' +
+        'Have you?\n\n' +
+        'You have, right?\n.\n.\n.\nlorem ipsum',
+        note.defaultColor
+    )
+
+    let n2 = new note(
+        'Another little tip',
+        'You can also change colors!\n\n' +
+        'Just click on the palette (top right)',
+        '#d58fd6'
+    )
+
+    notes.push(n1);
+    notes.push(n2);
 }
