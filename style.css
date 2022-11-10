@@ -12,6 +12,9 @@
     --p3-color: rgb(209, 210, 119);
     --p4-color: rgb(225, 163, 116);
     --p5-color: rgb(227, 124, 124);
+    --x-color: rgb(201, 75, 75);
+    --note-height: 300px;
+    --note-color: #d6d68d;
 }
 
 * {
@@ -57,7 +60,8 @@ h3 {
 }
 
 .task,
-.project {
+.project,
+.note {
     background-color: var(--task-color);
     border-radius: 8px;
     padding: 8px;
@@ -66,6 +70,27 @@ h3 {
 
 .project {
     background-color: var(--project-color);
+}
+
+.note {
+    background-color: var(--note-color);
+    min-height: var(--note-height);
+    max-height: var(--note-height);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.color-label {
+    background-image: url('./img/palette.png');
+    background-size: 32px 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.color {
+    visibility: hidden;
 }
 
 #add-btn,
@@ -79,6 +104,10 @@ h3 {
     height: 55px;
     font-size: 2.8rem;
     transition: 0.2s;
+}
+
+#note-list > #add-btn {
+    height: auto;
 }
 
 #add-btn:hover,
@@ -124,6 +153,11 @@ h3 {
 .title {
     font-size: 1.5rem;
     flex-grow: 1;
+}
+
+.note .title {
+    color: black;
+    flex-grow: 0;
 }
 
 .due,
@@ -247,7 +281,7 @@ h3 {
 }
 
 .remove {
-    color: var(--p5-color);
+    color: var(--x-color);
     font-size: 1.25rem;
     position: absolute;
     right: 4px;
@@ -281,6 +315,14 @@ h3 {
     resize: none;
 }
 
+.note .description {
+    background-color: var(--note-color);
+    border-radius: 0;
+    flex-grow: 1;
+    color: black;
+    padding: 0;
+}
+
 .project .description:first-child {
     background-color: var(--task-color);
 }
@@ -292,8 +334,13 @@ h3 {
     overflow: hidden;
 }
 
+#times {
+    margin-bottom: 3px;
+}
+
 #task-list,
 #project-list,
+#note-list,
 .task-list {
     display: flex;
     flex-direction: column;
@@ -301,6 +348,12 @@ h3 {
     padding: 0;
     flex-grow: 1;
     overflow: auto;
+}
+
+#note-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(auto-fit, var(--note-height));
 }
 
 .task-list {
