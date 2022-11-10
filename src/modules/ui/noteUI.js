@@ -28,7 +28,7 @@ function createAddBtn() {
 
 function createNoteList() {
     let newNoteList = document.createElement('div');
-    newNoteList.classList.add('note-list');
+    newNoteList.id = 'note-list';
     noteList = newNoteList;
 }
 
@@ -45,8 +45,12 @@ function createNote(sample) {
     let container = document.createElement('div');
     container.classList.add('note');
     container.innerHTML =
-        "<input type='text' class='title'>" +
-        "<input type='color' class='color'>" +
+        "<div class='basic'>" +
+            "<input type='text' class='title'>" +
+            "<label class='color-label'>" +
+                "<input type='color' class='color'>" +
+            "</label>" +
+        "</div>" +
         "<button class='remove'>✖</button>" +
         "<textarea class='description'></textarea>";
 
@@ -54,13 +58,6 @@ function createNote(sample) {
     title.value = sample.title;
     title.addEventListener('change', (e) => {
         sample.title = e.target.value;
-        storage.saveNotes();
-    });
-
-    let color = container.querySelector('.color');
-    color.value = sample.color;
-    color.addEventListener('change', (e) => {
-        sample.color = e.target.value;
         storage.saveNotes();
     });
 
@@ -74,6 +71,17 @@ function createNote(sample) {
     description.value = sample.desc;
     description.addEventListener('change', (e) => {
         sample.desc = e.target.value;
+        storage.saveNotes();
+    });
+
+    let color = container.querySelector('.color');
+    color.value = sample.color;
+    container.style.backgroundColor = sample.color;
+    description.style.backgroundColor = sample.color;
+    color.addEventListener('change', (e) => {
+        sample.color = e.target.value;
+        container.style.backgroundColor = e.target.value;
+        description.style.backgroundColor = e.target.value;
         storage.saveNotes();
     });
 

@@ -96,7 +96,7 @@ export function createNote() {
         new note(
             'New Note',
             'Enter Details',
-            '#FFFFFF'
+            '#d6d68d'
         );
     notes.push(newNote);
     saveNotes();
