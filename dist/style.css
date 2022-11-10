@@ -2,19 +2,22 @@
 
 :root {
     font-size: 14px;
-    --app-color: #3c4752;
-    --task-color-dark: #627a7f;
-    --task-color: #78969c;
-    --project-color: #8dafb6;
-    --project-color-dark: #74637e;
-    --p1-color: rgb(146, 221, 223);
-    --p2-color: rgb(91, 212, 119);
-    --p3-color: rgb(209, 210, 119);
-    --p4-color: rgb(225, 163, 116);
-    --p5-color: rgb(227, 124, 124);
+    --app-color: #201f4b;
+    --project-color: #736eba;
+    --project-color-dark: #635fa1;
+    --p1-color: rgb(132, 156, 199);
+    --p1-color-dark: rgb(115, 137, 176);
+    --p2-color: rgb(209, 193, 136);
+    --p2-color-dark: rgb(186, 172, 120);
+    --p3-color: rgb(211, 145, 118);
+    --p3-color-dark: rgb(188, 128, 104);
+    --p4-color: rgb(209, 118, 118);
+    --p4-color-dark: rgb(185, 104, 104);
+    --p5-color: rgb(198, 141, 208);
+    --p5-color-dark: rgb(175, 123, 184);
     --x-color: rgb(201, 75, 75);
     --note-height: 300px;
-    --note-color: #d6d68d;
+    --active-color: rgb(228, 228, 228);
 }
 
 * {
@@ -34,7 +37,19 @@ body {
     align-items: center;
     height: 100vh;
     scrollbar-width: none;
-    background-color: rgb(27, 28, 44);
+
+    background-image: url('./img/background.jpg');
+    background-size: cover;
+    position: relative;
+}
+
+body::after {
+    position: absolute;
+    background-color: black;
+    padding: 0 4px;
+    content: 'Image by Freepik';
+    bottom: 0;
+    left: 0;
 }
 
 ::-webkit-scrollbar {
@@ -56,13 +71,13 @@ textarea {
 }
 
 h3 {
+    font-weight: 350;
     font-size: 1.5rem;
 }
 
 .task,
 .project,
 .note {
-    background-color: var(--task-color);
     border-radius: 8px;
     padding: 8px;
     position: relative;
@@ -73,7 +88,6 @@ h3 {
 }
 
 .note {
-    background-color: var(--note-color);
     min-height: var(--note-height);
     max-height: var(--note-height);
     border-radius: 4px;
@@ -195,12 +209,17 @@ h3 {
     padding: 4px 8px;
     color: 1;
     flex-grow: 1;
+
+    border-top: 1.5px white solid;
+    border-bottom: 1.5px white solid;
 }
 
 .p1 {
     background-color: var(--p1-color);
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
+
+    border-left: 1.5px white solid;
 }
 
 .p2 {
@@ -219,12 +238,18 @@ h3 {
     background-color: var(--p5-color);
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
+
+    border-right: 1.5px white solid;
 }
 
-.active {
-    background-color: rgb(228, 228, 228);
+.active:not(.priority) {
+    background-color: var(--active-color);
     color: rgb(65, 65, 65);
     transition: 0.2s;
+}
+
+.priority.active {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .finished {
@@ -309,22 +334,23 @@ h3 {
 .description {
     width: 100%;
     min-height: 5rem;
-    background-color: var(--task-color-dark);
     padding: 4px;
     border-radius: 4px;
     resize: none;
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.25);
 }
 
 .note .description {
-    background-color: var(--note-color);
     border-radius: 0;
     flex-grow: 1;
     color: black;
     padding: 0;
+
+    box-shadow: none;
 }
 
 .project .description:first-child {
-    background-color: var(--task-color);
+    background-color: var(--project-color-dark);
 }
 
 #content {

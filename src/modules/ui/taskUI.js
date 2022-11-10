@@ -193,19 +193,6 @@ export function createTask(sample) {
         storage.removeTask(sample);
     });
 
-    let priorities = container.querySelectorAll('.priority');
-    priorities.forEach(priority => {
-        priority.addEventListener('click', (e) => {
-            let prios = container.querySelectorAll('.priority');
-            prios.forEach(p => p.classList.remove('active'));
-            e.target.classList.add('active');
-            sample.prio = parseInt(e.target.textContent);
-            storage.saveTasks();
-            storage.saveProjects();
-        });
-    });
-    priorities[sample.prio-1].classList.add('active');
-
     let description = container.querySelector('.description');
     description.value = sample.desc;
     description.addEventListener('change', (e) => {
@@ -213,6 +200,29 @@ export function createTask(sample) {
         storage.saveTasks();
         storage.saveProjects();
     });
+
+    let priorities = container.querySelectorAll('.priority');
+    priorities.forEach(priority => {
+        priority.addEventListener('click', (e) => {
+            let prios = container.querySelectorAll('.priority');
+            prios.forEach(p => p.classList.remove('active'));
+            e.target.classList.add('active');
+            sample.prio = parseInt(e.target.textContent);
+
+            container.style.backgroundColor = 
+                'var(--p' +  e.target.textContent + '-color)';
+            description.style.backgroundColor = 
+                'var(--p' +  e.target.textContent + '-color-dark)';
+
+            storage.saveTasks();
+            storage.saveProjects();
+        });
+    });
+    priorities[sample.prio-1].classList.add('active');
+    container.style.backgroundColor = 
+    'var(--p' +  sample.prio + '-color)';
+    description.style.backgroundColor = 
+    'var(--p' +  sample.prio + '-color-dark)';
 
     return container;
 }
